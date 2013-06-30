@@ -7,6 +7,8 @@ distributed mobile metronome slaves synced to a computer master (MIDI->phones)
 
 Works only with node 0.8.x for now.
 
+	git clone https://github.com/drewbharris/livesync
+	cd livesync
 	npm install
 	node index.js
 
