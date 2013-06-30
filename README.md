@@ -22,6 +22,10 @@ Q: I can't hear anything on iOS 6.
 
 A: iOS requires some user interaction to activate the Web Audio API.  After opening the page on your device, tap either "tick" or "tock" to start the interaction.
 
+Q: It's super glitchy over WiFi.
+
+A: Yes, that's true.  Right now there's no delay or latency compensation at all.  It works best on an ad-hoc WiFi connection currently.
+
 ## License
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
