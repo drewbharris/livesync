@@ -15,6 +15,7 @@ var liveSync = new LiveSync();
 
 app.use("/js", express.static(__dirname + '/web/js'));
 app.use("/css", express.static(__dirname + '/web/css'));
+app.use("/audio", express.static(__dirname + '/web/audio'));
 app.use(express.bodyParser());
 
 // Web app routes

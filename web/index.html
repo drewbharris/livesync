@@ -10,15 +10,54 @@
     <script src="/js/jquery-1.9.1.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script type="text/javascript">
-    	var socket = io.connect('http://' + location.host);
+    	var socket = io.connect('http://192.168.2.137:8000');
+      var context = new webkitAudioContext(),
+        bufferLoader,
+        audioBuffers = {},
+        sounds = {};
+
       socket.on('data', function(data){
         if (data.metronomeVal === 0){
-          console.log('tick');
+          playAudio('tick');
         }
         if (data.metronomeVal === 1){
-          console.log('tock');
+          playAudio('tock');
         }
       });
+
+      $(document).ready(function(){
+        loadSound('tock');
+        loadSound('tick');
+        socket.on('data', function(data){
+          console.log('data');
+          if (data.metronomeVal === 0){
+            playAudio('tick');
+          }
+          if (data.metronomeVal === 1){
+            playAudio('tock');
+          }
+        });
+      });
+
+      function playAudio(name) {
+        sounds[name] = context.createBufferSource();
+        sounds[name].buffer = audioBuffers[name];
+        sounds[name].connect(context.destination);
+        sounds[name].noteOn(0);
+      }
+
+      function loadSound(name) {
+        var request = new XMLHttpRequest();
+        request.open('GET', '/audio/'+name+'.wav', true);
+        request.responseType = 'arraybuffer';
+        request.onload = function() {
+          context.decodeAudioData(request.response, function(buffer) {
+            console.log('buffer ' + name + ' loaded');
+            audioBuffers[name] = buffer;
+          });
+        }
+        request.send();
+      }
     </script>
   </body>
 </html>
