@@ -1,0 +1,24 @@
+<html>
+  <head>    
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+  	<div class="clearfix">
+      <div>
+  	</div>
+    <script src="/js/jquery-1.9.1.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript">
+    	var socket = io.connect('http://' + location.host);
+      socket.on('data', function(data){
+        if (data.metronomeVal === 0){
+          console.log('tick');
+        }
+        if (data.metronomeVal === 1){
+          console.log('tock');
+        }
+      });
+    </script>
+  </body>
+</html>
