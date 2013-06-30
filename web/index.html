@@ -2,28 +2,24 @@
   <head>    
     <link rel="stylesheet" href="/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/css/style.css" />
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
   </head>
   <body>
   	<div class="clearfix">
-      <div>
+      <div class="lead">
+        livesync
+      </div>
+      <button id="tick">tick</button>
+      <br>
+      <button id="tock">tock</button>
   	</div>
     <script src="/js/jquery-1.9.1.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script type="text/javascript">
-    	var socket = io.connect('http://192.168.2.137:8000');
+    	var socket = io.connect('ws://' + location.host);
       var context = new webkitAudioContext(),
-        bufferLoader,
         audioBuffers = {},
         sounds = {};
-
-      socket.on('data', function(data){
-        if (data.metronomeVal === 0){
-          playAudio('tick');
-        }
-        if (data.metronomeVal === 1){
-          playAudio('tock');
-        }
-      });
 
       $(document).ready(function(){
         loadSound('tock');
@@ -36,6 +32,12 @@
           if (data.metronomeVal === 1){
             playAudio('tock');
           }
+        });
+        $("#tick").click(function(){
+          playAudio('tick');
+        });
+        $("#tock").click(function(){
+          playAudio('tock');
         });
       });
 
@@ -50,12 +52,12 @@
         var request = new XMLHttpRequest();
         request.open('GET', '/audio/'+name+'.wav', true);
         request.responseType = 'arraybuffer';
-        request.onload = function() {
+        request.addEventListener('load', function(){
           context.decodeAudioData(request.response, function(buffer) {
             console.log('buffer ' + name + ' loaded');
             audioBuffers[name] = buffer;
           });
-        }
+        }, false);
         request.send();
       }
     </script>

@@ -1,0 +1,11 @@
+{
+  "name": "livesync",
+  "description": "distributed metronomes with webaudio",
+  "author": "Drew Harris <drewbharris@gmail.com>",
+  "dependencies": {
+    "express": "3.x",
+    "socket.io": "0.9.x",
+    "midi": "0.7.x"
+  },
+  "engine": "node == 0.8.x"
+}
