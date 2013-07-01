@@ -7,12 +7,14 @@ distributed mobile metronome slaves synced to a computer master (MIDI->phones)
 
 Works only with node 0.8.x for now.
 
+	git clone https://github.com/drewbharris/livesync
+	cd livesync
 	npm install
 	node index.js
 
 Connect your MIDI host to the virtual port "LiveSync" as an output (in Live, make sure it's track and remote output)
 
-Create a new MIDI clip:  use CC 50 as the "tick" and CC 51 as the "tock" of the metronome, set the output to LiveSync.
+Create a new MIDI clip:  use CC 50 as the "tick" and CC 51 as the "tock" of the metronome, set the output to LiveSync.  Note that only "note on"/begin messages are interpreted, so the actual value of the CC only has to be > 0 and the duration of the 
 
 Connect to <your_ip>:8000 with a Webkit/Blink browser (iOS 6+ supported)
 
@@ -21,6 +23,10 @@ Connect to <your_ip>:8000 with a Webkit/Blink browser (iOS 6+ supported)
 Q: I can't hear anything on iOS 6.
 
 A: iOS requires some user interaction to activate the Web Audio API.  After opening the page on your device, tap either "tick" or "tock" to start the interaction.
+
+Q: It's super glitchy over WiFi.
+
+A: Yes, that's true.  Right now there's no delay or latency compensation at all.  It works best on an ad-hoc WiFi connection currently.
 
 ## License
 
