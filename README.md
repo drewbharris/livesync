@@ -14,7 +14,7 @@ Works only with node 0.8.x for now.
 
 Connect your MIDI host to the virtual port "LiveSync" as an output (in Live, make sure it's track and remote output)
 
-Create a new MIDI clip:  use CC 50 as the "tick" and CC 51 as the "tock" of the metronome, set the output to LiveSync.
+Create a new MIDI clip:  use CC 50 as the "tick" and CC 51 as the "tock" of the metronome, set the output to LiveSync.  Note that only "note on"/begin messages are interpreted, so the actual value of the CC only has to be > 0 and the duration of the 
 
 Connect to <your_ip>:8000 with a Webkit/Blink browser (iOS 6+ supported)
 
